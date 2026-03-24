@@ -8,14 +8,18 @@ from dotenv import load_dotenv
 if os.path.exists('.env'):
     load_dotenv()
 
-TOKEN = os.getenv("5185489735:AAH4etIhtGzXW2YT5JqKAJNIbVT53B6u38o")
-WEATHER_API_KEY = os.getenv("438821ab4af5f999a549a37ab2169efa")
+TOKEN = os.getenv("BOT_TOKEN")
+WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
 
-# Проверка
+# Временная отладка
+print(f"DEBUG: BOT_TOKEN = {TOKEN[:20] if TOKEN else 'None'}...")
+print(f"DEBUG: WEATHER_API_KEY = {WEATHER_API_KEY[:10] if WEATHER_API_KEY else 'None'}...")
+
+# Если токенов нет - используем дефолтные (только для отладки!)
 if not TOKEN:
-    raise ValueError("❌ BOT_TOKEN не найден! Добавь в Environment Variables на Render")
+    TOKEN = "dummy_token_for_testing"
 if not WEATHER_API_KEY:
-    raise ValueError("❌ WEATHER_API_KEY не найден! Добавь в Environment Variables на Render")
+    WEATHER_API_KEY = "dummy_api_key"
 
 bot = telebot.TeleBot(TOKEN)
 app = Flask(__name__)
