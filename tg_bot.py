@@ -78,9 +78,13 @@ def echo(message):
 # Webhook endpoint - теперь динамический
 @app.route('/webhook', methods=['POST'])
 def webhook():
+    print("🔥 WEBHOOK ПОЛУЧЕН!")  # ← ДОБАВЬ
     json_str = request.get_data().decode('UTF-8')
+    print(f"📩 Данные: {json_str[:100]}")  # ← ДОБАВЬ
     update = telebot.types.Update.de_json(json_str)
+    print(f"✅ Update обработан: {update}")  # ← ДОБАВЬ
     bot.process_new_updates([update])
+    print("✅ Сообщение отправлено боту")  # ← ДОБАВЬ
     return '', 200
 
 @app.route('/')
