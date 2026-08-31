@@ -1,0 +1,410 @@
+<title>Протокол обхватов</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=PT+Sans+Narrow:wght@400;700&display=swap">
+<style>
+:root{
+  --bg:#ECEEEF; --card:#FFFFFF; --raised:#F5F7F8; --sunk:#E1E5E7;
+  --line:#D5D9DB; --line-soft:#E4E8EA;
+  --ink:#16191B; --muted:#5A6266; --faint:#8A9296;
+  --mark:#C1512E; --mark-wash:#FBEAE4;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14171A; --card:#1D2124; --raised:#262A2E; --sunk:#101315;
+    --line:#333A3E; --line-soft:#282E31;
+    --ink:#E6EAEC; --muted:#99A1A6; --faint:#6E767B;
+    --mark:#EE7F55; --mark-wash:#2E1D16;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14171A; --card:#1D2124; --raised:#262A2E; --sunk:#101315;
+  --line:#333A3E; --line-soft:#282E31;
+  --ink:#E6EAEC; --muted:#99A1A6; --faint:#6E767B;
+  --mark:#EE7F55; --mark-wash:#2E1D16;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  font-size:15.5px;line-height:1.6;-webkit-text-size-adjust:100%}
+.wrap{max-width:740px;margin:0 auto;padding:34px 18px 80px}
+h1,h2,h3{font-family:"PT Sans Narrow","Arial Narrow",sans-serif;font-weight:700;
+  letter-spacing:.005em;text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:40px}
+h2{font-size:27px}
+h3{font-size:19px}
+p{margin:0}
+.num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.eyebrow{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--faint);font-weight:600;font-family:"IBM Plex Sans",sans-serif}
+.lede{color:var(--muted);font-size:16.5px;max-width:62ch}
+section{margin-top:44px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+figure{margin:0;background:var(--card);border:1px solid var(--line);
+  border-radius:12px;padding:20px 16px 16px;overflow-x:auto}
+figure svg{display:block;width:100%;max-width:100%;height:auto;color:var(--ink)}
+figcaption{margin-top:14px;font-size:13px;color:var(--muted);
+  padding-top:12px;border-top:1px solid var(--line-soft)}
+.mark{color:var(--mark)}
+ol,ul{margin:0;padding-left:1.35em}
+li{margin-top:9px}
+li::marker{color:var(--faint);font-family:"IBM Plex Mono",monospace;font-size:.9em}
+.stack{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;gap:16px;flex-wrap:wrap}
+.row>*{flex:1 1 260px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{text-align:left;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--faint);font-weight:600;padding:0 10px 9px 0;border-bottom:1px solid var(--line)}
+td{padding:11px 10px 11px 0;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tr:last-child td{border-bottom:none}
+.pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;
+  padding:3px 9px;border-radius:99px;background:var(--mark-wash);color:var(--mark);white-space:nowrap}
+.note{background:var(--raised);border-left:3px solid var(--mark);
+  border-radius:0 9px 9px 0;padding:15px 18px}
+hr{border:none;border-top:1px solid var(--line);margin:0}
+.foot{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:13px;color:var(--faint)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<p class="eyebrow">Антропометрия · дополнение к METRICS.md</p>
+<h1>Протокол обхватов</h1>
+<p class="lede" style="margin-top:12px">
+  Три поля в трекере остались пустыми, и среди них — единственная метрика,
+  которая мерит приоритет&nbsp;№1 напрямую. Здесь показано, где именно
+  проходят линии замера и что портит ряд данных.
+</p>
+
+<!-- ============ ПОЧЕМУ ДЕЛЬТА ============ -->
+<section>
+  <p class="eyebrow">Зачем отдельное поле</p>
+  <h2>«Плечи» не отвечают на главный вопрос</h2>
+  <div class="stack" style="margin-top:16px">
+    <p>
+      Обхват «плечи» идёт вокруг всего плечевого пояса: <b>дельты + грудь + спина</b>.
+      Он растёт от широчайших и от жимов тоже. По нему нельзя сказать,
+      выросла ли средняя дельта — а она главный дефицит и приоритет №1 всего плана.
+    </p>
+    <p>
+      <b>Дельта L и R</b> мерят целевую мышцу изолированно. Раздельно —
+      чтобы поймать асимметрию: руки у тебя ровно <span class="num">37/37</span>,
+      но дельты расходятся чаще из-за перекоса в махах, и растущий разрыв
+      это сигнал к правке техники, а не к добавлению объёма.
+    </p>
+  </div>
+</section>
+
+<!-- ============ ФИГУРА 1 ============ -->
+<section>
+  <p class="eyebrow">Дельта L / R</p>
+  <h2>Точка находится от кости, а не на глаз</h2>
+
+  <figure style="margin-top:18px">
+    <svg viewBox="0 0 460 320" role="img"
+         aria-label="Схема плеча спереди: ключица ведёт к акромиону, от него отмеряется 5 сантиметров вниз, на этом уровне лента ложится горизонтально вокруг руки">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+        </marker>
+        <marker id="arm" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--mark)"/>
+        </marker>
+      </defs>
+
+      <!-- шея и ключица -->
+      <path d="M92 44 L92 96" stroke="currentColor" stroke-width="2" fill="none" opacity=".45"/>
+      <path d="M96 78 Q160 66 214 92" stroke="currentColor" stroke-width="2.5"
+            fill="none" opacity=".55"/>
+      <text x="104" y="62" font-size="12" fill="currentColor" opacity=".6"
+            font-family="IBM Plex Sans, sans-serif">ключица</text>
+
+      <!-- контур дельты и руки -->
+      <path d="M214 92 Q252 100 258 142 L262 196 Q264 236 258 286"
+            stroke="currentColor" stroke-width="2.5" fill="none" opacity=".75"/>
+      <path d="M150 118 Q168 150 172 196 Q174 240 178 286"
+            stroke="currentColor" stroke-width="2.5" fill="none" opacity=".75"/>
+      <path d="M96 96 Q124 100 150 118" stroke="currentColor" stroke-width="2"
+            fill="none" opacity=".45"/>
+
+      <!-- акромион -->
+      <circle cx="214" cy="92" r="6.5" fill="var(--mark)"/>
+      <circle cx="214" cy="92" r="12" fill="none" stroke="var(--mark)"
+              stroke-width="1.5" opacity=".45"/>
+      <line x1="228" y1="80" x2="286" y2="52" stroke="var(--mark)" stroke-width="1.5"/>
+      <text x="292" y="49" font-size="13.5" fill="var(--mark)" font-weight="600"
+            font-family="IBM Plex Sans, sans-serif">акромион</text>
+      <text x="292" y="66" font-size="11.5" fill="currentColor" opacity=".62"
+            font-family="IBM Plex Sans, sans-serif">край кости, где</text>
+      <text x="292" y="80" font-size="11.5" fill="currentColor" opacity=".62"
+            font-family="IBM Plex Sans, sans-serif">кончается ключица</text>
+
+      <!-- вертикальные 5 см -->
+      <line x1="214" y1="92" x2="214" y2="164" stroke="var(--mark)"
+            stroke-width="1.5" stroke-dasharray="4 4"/>
+      <line x1="206" y1="92" x2="222" y2="92" stroke="var(--mark)" stroke-width="2"/>
+      <line x1="206" y1="164" x2="222" y2="164" stroke="var(--mark)" stroke-width="2"/>
+      <line x1="240" y1="98" x2="240" y2="158" stroke="var(--mark)" stroke-width="1.5"
+            marker-start="url(#arm)" marker-end="url(#arm)"/>
+      <text x="248" y="133" font-size="14" fill="var(--mark)" font-weight="600"
+            font-family="IBM Plex Mono, monospace">5 см</text>
+
+      <!-- плоскость замера -->
+      <ellipse cx="216" cy="164" rx="46" ry="12" fill="none"
+               stroke="var(--mark)" stroke-width="3"/>
+      <line x1="120" y1="164" x2="168" y2="164" stroke="var(--mark)"
+            stroke-width="1.5" stroke-dasharray="3 4" opacity=".6"/>
+      <text x="20" y="160" font-size="13.5" fill="var(--mark)" font-weight="600"
+            font-family="IBM Plex Sans, sans-serif">лента</text>
+      <text x="20" y="177" font-size="11.5" fill="currentColor" opacity=".62"
+            font-family="IBM Plex Sans, sans-serif">строго горизонтально</text>
+
+      <!-- рука висит -->
+      <line x1="218" y1="300" x2="218" y2="312" stroke="currentColor"
+            stroke-width="1.5" opacity=".4" marker-end="url(#ar)"/>
+      <text x="230" y="310" font-size="11.5" fill="currentColor" opacity=".62"
+            font-family="IBM Plex Sans, sans-serif">рука висит свободно</text>
+    </svg>
+    <figcaption>
+      Акромион — костный край на верхушке плеча: веди пальцами по ключице наружу,
+      пока кость не кончится. От него отмеряй <b>5 см вниз</b> и на этом уровне
+      оборачивай ленту вокруг руки перпендикулярно её оси.
+    </figcaption>
+  </figure>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Порядок</h3>
+    <ol style="margin-top:12px">
+      <li>Стоя, расслабленно. Плечи <b>опущены</b>, не сведены и не подняты.</li>
+      <li>Найди акромион пальцами и поставь точку маркером — <b>один раз</b>,
+          дальше метку обновляй, а не ищи заново.</li>
+      <li>Отмерь 5 см строго вниз, поставь вторую метку.</li>
+      <li>Оберни ленту по второй метке. Лента прилегает, кожу не вдавливает.</li>
+      <li>Рука висит свободно вдоль тела. <b>Не напрягать, не отводить.</b></li>
+      <li>Три замера. Разброс ≤ <span class="num">0,3 см</span> → записать медиану.
+          Больше <span class="num">0,5 см</span> → перемерить всё заново.</li>
+      <li>То же самое на второй руке. Записать отдельно.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ ФИГУРА 2 ============ -->
+<section>
+  <p class="eyebrow">Три причины, по которым ряд ломается</p>
+  <h2>Что портит замер</h2>
+
+  <figure style="margin-top:18px">
+    <svg viewBox="0 0 620 250" role="img"
+         aria-label="Сравнение трёх положений: правильное с горизонтальной лентой и опущенным плечом, и два неправильных — лента идёт по скату мышцы и плечо поднято">
+
+      <!-- ВЕРНО -->
+      <g>
+        <path d="M60 42 Q96 50 102 88 L106 190" stroke="currentColor"
+              stroke-width="2.5" fill="none" opacity=".75"/>
+        <path d="M8 62 Q26 92 30 130 L34 190" stroke="currentColor"
+              stroke-width="2.5" fill="none" opacity=".75"/>
+        <circle cx="60" cy="42" r="5" fill="var(--mark)"/>
+        <ellipse cx="66" cy="110" rx="38" ry="10" fill="none"
+                 stroke="var(--mark)" stroke-width="3"/>
+        <line x1="14" y1="110" x2="28" y2="110" stroke="var(--mark)"
+              stroke-width="1.5" stroke-dasharray="3 3" opacity=".55"/>
+        <text x="8" y="222" font-size="13" fill="var(--mark)" font-weight="600"
+              font-family="IBM Plex Sans, sans-serif">Верно</text>
+        <text x="8" y="240" font-size="11.5" fill="currentColor" opacity=".6"
+              font-family="IBM Plex Sans, sans-serif">лента горизонтальна</text>
+      </g>
+
+      <!-- НЕВЕРНО 1: лента по скату -->
+      <g opacity=".55">
+        <path d="M270 42 Q306 50 312 88 L316 190" stroke="currentColor"
+              stroke-width="2.5" fill="none"/>
+        <path d="M218 62 Q236 92 240 130 L244 190" stroke="currentColor"
+              stroke-width="2.5" fill="none"/>
+        <circle cx="270" cy="42" r="5" fill="currentColor"/>
+        <g transform="rotate(-17 276 110)">
+          <ellipse cx="276" cy="110" rx="38" ry="10" fill="none"
+                   stroke="currentColor" stroke-width="3"/>
+        </g>
+        <path d="M238 128 L318 100" stroke="currentColor" stroke-width="1"
+              stroke-dasharray="3 3"/>
+      </g>
+      <text x="218" y="222" font-size="13" fill="currentColor" opacity=".72"
+            font-weight="600" font-family="IBM Plex Sans, sans-serif">Лента по скату</text>
+      <text x="218" y="240" font-size="11.5" fill="currentColor" opacity=".55"
+            font-family="IBM Plex Sans, sans-serif">завышает на 0,5–1,5 см</text>
+
+      <!-- НЕВЕРНО 2: плечо поднято -->
+      <g opacity=".55">
+        <path d="M482 26 Q518 34 524 74 L528 190" stroke="currentColor"
+              stroke-width="2.5" fill="none"/>
+        <path d="M430 46 Q448 78 452 118 L456 190" stroke="currentColor"
+              stroke-width="2.5" fill="none"/>
+        <circle cx="482" cy="26" r="5" fill="currentColor"/>
+        <ellipse cx="488" cy="96" rx="40" ry="10" fill="none"
+                 stroke="currentColor" stroke-width="3"/>
+        <line x1="482" y1="26" x2="482" y2="8" stroke="currentColor"
+              stroke-width="1.5" marker-end="url(#ar)"/>
+      </g>
+      <text x="430" y="222" font-size="13" fill="currentColor" opacity=".72"
+            font-weight="600" font-family="IBM Plex Sans, sans-serif">Плечо поднято</text>
+      <text x="430" y="240" font-size="11.5" fill="currentColor" opacity=".55"
+            font-family="IBM Plex Sans, sans-serif">точка уезжает, ряд рвётся</text>
+    </svg>
+    <figcaption>
+      Два частых промаха. Лента, положенная <b>по скату дельты</b>, идёт под углом
+      и режет эллипс длиннее — обхват завышается. <b>Поднятое плечо</b> смещает
+      сам акромион, поэтому 5 см отсчитываются от другой точки, и сравнивать
+      такой замер с прошлым уже нельзя.
+    </figcaption>
+  </figure>
+</section>
+
+<!-- ============ ФИГУРА 3 ============ -->
+<section>
+  <p class="eyebrow">Талия узкая</p>
+  <h2>Почему точек две, а не одна</h2>
+
+  <figure style="margin-top:18px">
+    <svg viewBox="0 0 470 380" role="img"
+         aria-label="Схема торса спереди: нижнее ребро и гребень подвздошной кости, середина между ними даёт точку ВОЗ, узкая точка лежит выше неё">
+
+      <!-- контур торса: реально сужается на уровне узкой точки -->
+      <path d="M138 26 Q133 74 136 106 Q150 128 151 150 Q148 170 146 188
+               Q139 230 133 264 Q130 312 131 356"
+            stroke="currentColor" stroke-width="2.5" fill="none" opacity=".7"/>
+      <path d="M300 26 Q305 74 302 106 Q288 128 287 150 Q290 170 292 188
+               Q299 230 305 264 Q308 312 307 356"
+            stroke="currentColor" stroke-width="2.5" fill="none" opacity=".7"/>
+      <path d="M138 26 L300 26" stroke="currentColor" stroke-width="2.5" opacity=".7"/>
+
+      <!-- нижнее ребро -->
+      <line x1="136" y1="112" x2="302" y2="112" stroke="currentColor"
+            stroke-width="1.5" stroke-dasharray="5 4" opacity=".5"/>
+      <circle cx="136" cy="112" r="4.5" fill="currentColor" opacity=".65"/>
+      <text x="318" y="110" font-size="12.5" fill="currentColor" opacity=".68"
+            font-family="IBM Plex Sans, sans-serif">нижнее ребро</text>
+
+      <!-- гребень подвздошной -->
+      <line x1="133" y1="264" x2="305" y2="264" stroke="currentColor"
+            stroke-width="1.5" stroke-dasharray="5 4" opacity=".5"/>
+      <circle cx="133" cy="264" r="4.5" fill="currentColor" opacity=".65"/>
+      <text x="318" y="262" font-size="12.5" fill="currentColor" opacity=".68"
+            font-family="IBM Plex Sans, sans-serif">гребень таза</text>
+
+      <!-- построение середины: 112 -> 264, ровно посередине 188 -->
+      <line x1="92" y1="112" x2="92" y2="264" stroke="currentColor"
+            stroke-width="1.5" opacity=".55"
+            marker-start="url(#ar)" marker-end="url(#ar)"/>
+      <line x1="84" y1="188" x2="100" y2="188" stroke="var(--mark)" stroke-width="2.5"/>
+      <text x="16" y="184" font-size="11.5" fill="currentColor" opacity=".62"
+            font-family="IBM Plex Sans, sans-serif">ровно</text>
+      <text x="16" y="199" font-size="11.5" fill="currentColor" opacity=".62"
+            font-family="IBM Plex Sans, sans-serif">середина</text>
+
+      <!-- узкая точка: там, где контур действительно уже всего -->
+      <ellipse cx="219" cy="150" rx="68" ry="11" fill="none"
+               stroke="var(--mark)" stroke-width="3" stroke-dasharray="7 5"/>
+      <text x="318" y="146" font-size="13.5" fill="var(--mark)" font-weight="600"
+            font-family="IBM Plex Sans, sans-serif">талия узкая</text>
+      <text x="318" y="163" font-size="11.5" fill="currentColor" opacity=".62"
+            font-family="IBM Plex Sans, sans-serif">самое узкое место</text>
+
+      <!-- линия ВОЗ -->
+      <ellipse cx="219" cy="188" rx="73" ry="12" fill="none"
+               stroke="var(--mark)" stroke-width="3"/>
+      <text x="318" y="192" font-size="13.5" fill="var(--mark)" font-weight="600"
+            font-family="IBM Plex Sans, sans-serif">талия ВОЗ</text>
+      <text x="318" y="209" font-size="11.5" fill="currentColor" opacity=".62"
+            font-family="IBM Plex Sans, sans-serif">идёт в правило</text>
+      <text x="318" y="223" font-size="11.5" fill="currentColor" opacity=".62"
+            font-family="IBM Plex Sans, sans-serif">коррекции калорий</text>
+
+      <!-- пупок -->
+      <circle cx="219" cy="212" r="4" fill="currentColor" opacity=".5"/>
+      <text x="228" y="217" font-size="11.5" fill="currentColor" opacity=".55"
+            font-family="IBM Plex Sans, sans-serif">пупок</text>
+    </svg>
+    <figcaption>
+      Точка ВОЗ строится геометрически — <b>ровно посередине</b> между нижним ребром
+      и гребнем таза, поэтому её может повторить кто угодно. Узкая точка лежит выше,
+      обычно на 2–5 см над пупком, и её надо найти один раз, записав привязку
+      словами: «на 3 см выше пупка».
+    </figcaption>
+  </figure>
+
+  <div class="note" style="margin-top:16px">
+    <p><b>Две точки нужны потому, что они двигаются по-разному.</b>
+    Жир приходит сначала на уровень ВОЗ — он ниже и ближе к тазу.
+    Узкая точка сильнее зависит от положения рёбер и осанки. Расхождение
+    между ними само по себе информативно: талия ВОЗ поехала вверх,
+    а узкая стоит — это жир, а не «раздался корпус».</p>
+  </div>
+</section>
+
+<!-- ============ ОБЩИЕ УСЛОВИЯ ============ -->
+<section>
+  <p class="eyebrow">Общее для всех обхватов</p>
+  <h2>Условия, без которых числа несравнимы</h2>
+
+  <div class="card" style="margin-top:16px">
+    <table>
+      <thead><tr><th style="width:34%">Условие</th><th>Как именно</th></tr></thead>
+      <tbody>
+        <tr><td>Когда</td><td>Утро, после туалета, до воды и еды. Пн / Ср / Пт / Вс</td></tr>
+        <tr><td>Дыхание</td><td>Конец <b>спокойного выдоха</b>. Не втягивать, не надувать, не задерживать</td></tr>
+        <tr><td>Поза</td><td>Стоя, стопы 15–20 см, вес поровну на обе ноги</td></tr>
+        <tr><td>Лента</td><td>Прилегает, кожу не вдавливает. С натяжителем на 100 г погрешность вдвое ниже</td></tr>
+        <tr><td>Повтор</td><td>3 замера → медиана. Разброс &gt; 0,5 см → перемерить всё</td></tr>
+        <tr><td>Кто мерит</td><td>Всегда один и тот же. Смена измеряющего = разрыв ряда</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    <p><b>Первое число не значит ничего — оно просто база.</b>
+    Абсолютный обхват дельты сравнивать не с чем: он зависит от того,
+    где именно ты поставил метку. Значение имеет только его изменение
+    относительно себя же, поэтому метку и ставят маркером.</p>
+  </div>
+</section>
+
+<!-- ============ ЧТО СЧИТАТЬ ИЗМЕНЕНИЕМ ============ -->
+<section>
+  <p class="eyebrow">Разрешающая способность</p>
+  <h2>Что считать реальным изменением</h2>
+
+  <div class="card" style="margin-top:16px">
+    <table>
+      <thead><tr><th style="width:42%">Окно</th><th>Порог</th></tr></thead>
+      <tbody>
+        <tr><td>Один замер</td>
+            <td><span class="pill">не читается</span> шум ±1,0–1,8 см перекрывает сигнал в 30 раз</td></tr>
+        <tr><td>Неделя, среднее по 4 замерам</td>
+            <td>погрешность падает до <span class="num">±0,6 см</span></td></tr>
+        <tr><td>Талия за 28 дней</td>
+            <td>значимо от <span class="num">+0,8 см</span> → срабатывает правило калорий</td></tr>
+        <tr><td>Дельта за месяц</td>
+            <td><span class="pill">не читается</span> ожидаемый прирост ~0,2 см под шумом</td></tr>
+        <tr><td>Плечи минус талия за 12 недель</td>
+            <td>значимо от <span class="num">+1,0 см</span></td></tr>
+        <tr><td>Плечи минус талия за 6 месяцев</td>
+            <td>первое надёжное чтение, от <span class="num">+2,0 см</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted)">
+    Отсюда правило, которое экономит нервы: <b>обхваты записываются четыре раза
+    в неделю, а смотрятся раз в квартал.</b> Помесячное чтение пропорций даёт
+    чистый шум и провоцирует дёргать план.
+  </p>
+</section>
+
+<p class="foot">
+  Дополняет METRICS.md §2. Пороги оттуда же — они пересчитаны под 4 замера
+  в неделю, а не под ежедневные.
+</p>
+
+</div>

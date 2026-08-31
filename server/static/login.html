@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Вход</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#1C1A17">
+<link rel="stylesheet" href="/static/css/fonts.css">
+<link rel="stylesheet" href="/static/css/base.css">
+</head>
+<body>
+<main class="shell">
+  <h1 class="disp" style="font-size:28px;margin-bottom:4px">Дневной баланс</h1>
+  <p style="margin:0 0 20px;color:var(--muted);font-size:13.5px">Журнал тренировок и питания</p>
+  <form class="card" id="f" autocomplete="on">
+    <label class="eyebrow" for="p" style="display:block;margin-bottom:7px">Пароль</label>
+    <input type="password" id="p" name="password" autocomplete="current-password" required autofocus>
+    <button class="btn" type="submit" style="margin-top:14px" id="b">Войти</button>
+    <div class="err" id="e" hidden></div>
+  </form>
+</main>
+<script>
+var f=document.getElementById("f"), e=document.getElementById("e"), b=document.getElementById("b");
+f.addEventListener("submit", function(ev){
+  ev.preventDefault(); e.hidden=true; b.disabled=true; b.textContent="Проверяю…";
+  fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},
+    credentials:"same-origin",body:JSON.stringify({password:document.getElementById("p").value})})
+  .then(function(r){
+    if(r.ok){
+      var n=new URLSearchParams(location.search).get("next");
+      location.href = (n && n.indexOf("/")===0) ? n : "/app/";
+      return;
+    }
+    e.textContent = r.status===429
+      ? "Слишком много попыток. Подожди 15 минут."
+      : "Неверный пароль.";
+    e.hidden=false; b.disabled=false; b.textContent="Войти";
+  })
+  .catch(function(){ e.textContent="Нет связи с сервером."; e.hidden=false;
+    b.disabled=false; b.textContent="Войти"; });
+});
+</script>
+</body>
+</html>
