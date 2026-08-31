@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Журнал подвала</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#1C1A17">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/static/icon.svg">
+<link rel="stylesheet" href="/static/css/fonts.css">
+<link rel="stylesheet" href="/static/css/tracker.css">
+</head>
+<body>
+<div id="root"></div>
+<nav style="max-width:620px;margin:0 auto;padding:0 14px 26px;font-size:12px">
+  <a href="/app/" style="color:var(--muted)">&larr; все приложения</a>
+</nav>
+<script>window.SYNC_CONFIG={docKey:"tracker",lsKey:"podval-log-v1",daysPath:null};</script>
+<script src="/static/js/vendor/react.js"></script>
+<script src="/static/js/vendor/react-dom.js"></script>
+<script src="/static/js/sync.js"></script>
+<script src="/static/js/tracker.js"></script>
+<script>if("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+</body>
+</html>

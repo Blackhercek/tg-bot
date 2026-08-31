@@ -1,0 +1,12 @@
+# секреты и данные — никогда в репозиторий
+.env
+server/.env
+server/data/
+server/backups/
+
+# окружения и сборочный мусор
+.venv/
+.venv-test/
+__pycache__/
+*.pyc
+node_modules/
