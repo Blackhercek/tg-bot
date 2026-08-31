@@ -141,6 +141,12 @@ def app_tracker():
     return page("tracker.html")
 
 
+@app.route("/app/guide")
+@require_auth
+def app_guide():
+    return page("guide.html")
+
+
 @app.route("/static/<path:sub>")
 def static_files(sub):
     resp = send_from_directory(STATIC_DIR, sub)

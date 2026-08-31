@@ -3,7 +3,7 @@
    обеспечивает слой sync через localStorage. */
 const CACHE = "fit-v1";
 const SHELL = [
-  "/app/", "/app/nutrition", "/app/tracker",
+  "/app/", "/app/nutrition", "/app/tracker", "/app/guide",
   "/static/js/vendor/react.js", "/static/js/vendor/react-dom.js",
   "/static/js/sync.js", "/static/js/nutrition.js", "/static/js/tracker.js",
   "/static/css/nutrition.css", "/static/css/tracker.css", "/static/css/base.css", "/static/css/fonts.css",
