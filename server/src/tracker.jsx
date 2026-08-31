@@ -72,10 +72,15 @@ const DAYS = [
 ];
 
 const GIRTHS = [
-  {k:"waistWho", label:"Талия (ВОЗ)"}, {k:"waistNarrow", label:"Талия узкая"},
-  {k:"shoulders", label:"Плечи"}, {k:"deltL", label:"Дельта L"}, {k:"deltR", label:"Дельта R"},
-  {k:"chest", label:"Грудь под мышками"}, {k:"armL", label:"Рука L"}, {k:"armR", label:"Рука R"},
-  {k:"thigh", label:"Бедро"},
+  {k:"waistWho",    label:"Талия (ВОЗ)",       hint:"ровно посередине между нижним ребром и гребнем таза"},
+  {k:"waistNarrow", label:"Талия узкая",       hint:"самое узкое место, привязка к пупку"},
+  {k:"shoulders",   label:"Плечи",             hint:"самая широкая точка через дельты, лента горизонтально"},
+  {k:"deltL",       label:"Дельта L",          hint:"5 см ниже акромиона, рука висит свободно"},
+  {k:"deltR",       label:"Дельта R",          hint:"5 см ниже акромиона, рука висит свободно"},
+  {k:"chest",       label:"Грудь под мышками", hint:"подмышечная линия, на спокойном выдохе"},
+  {k:"armL",        label:"Рука L",            hint:"НАПРЯЖЁННАЯ, пик бицепса, локоть 90°"},
+  {k:"armR",        label:"Рука R",            hint:"НАПРЯЖЁННАЯ, пик бицепса, локоть 90°"},
+  {k:"thigh",       label:"Бедро",             hint:"15 см выше верхнего края коленной чашечки"},
 ];
 const HOOPER = [{k:"sleep",l:"Сон"},{k:"fatigue",l:"Усталость"},{k:"doms",l:"Болезненность"},{k:"stress",l:"Стресс"}];
 const GIRTH_DAYS = [1,3,5,0]; // Пн Ср Пт Вс
@@ -424,7 +429,7 @@ function App(){
           <div className="card" style={{padding:14}}>
             <div className="eyebrow" style={{marginBottom:3}}>Обхваты · только Пн / Ср / Пт / Вс</div>
             <p style={{margin:"0 0 10px",fontSize:12.5,color:"var(--muted)"}}>
-              Конец спокойного выдоха. Не втягивать. 3 замера, разброс ≤0,3 см → медиана.
+              Конец спокойного выдоха. Не втягивать. 3 замера, разброс ≤0,3 см → медиана.{" "}<a href="/app/guide" style={{color:"var(--accent)"}}>схемы точек</a>
             </p>
             {showGirth ? (
               <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(140px,1fr))",gap:9}}>
@@ -435,7 +440,8 @@ function App(){
                       value={(morning.girth&&morning.girth[g.k])||""}
                       onChange={e=>patch(en=>{ en.morning={...(en.morning||{})};
                         en.morning.girth={...(en.morning.girth||{}),[g.k]:e.target.value}; })}
-                      aria-label={g.label}/>
+                      aria-label={`${g.label}: ${g.hint}`}/>
+                    <div style={{fontSize:10.5,lineHeight:1.35,color:"var(--faint)",marginTop:4}}>{g.hint}</div>
                   </div>
                 ))}
               </div>

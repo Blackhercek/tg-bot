@@ -478,31 +478,40 @@ const DAYS = [{
 }];
 const GIRTHS = [{
   k: "waistWho",
-  label: "Талия (ВОЗ)"
+  label: "Талия (ВОЗ)",
+  hint: "ровно посередине между нижним ребром и гребнем таза"
 }, {
   k: "waistNarrow",
-  label: "Талия узкая"
+  label: "Талия узкая",
+  hint: "самое узкое место, привязка к пупку"
 }, {
   k: "shoulders",
-  label: "Плечи"
+  label: "Плечи",
+  hint: "самая широкая точка через дельты, лента горизонтально"
 }, {
   k: "deltL",
-  label: "Дельта L"
+  label: "Дельта L",
+  hint: "5 см ниже акромиона, рука висит свободно"
 }, {
   k: "deltR",
-  label: "Дельта R"
+  label: "Дельта R",
+  hint: "5 см ниже акромиона, рука висит свободно"
 }, {
   k: "chest",
-  label: "Грудь под мышками"
+  label: "Грудь под мышками",
+  hint: "подмышечная линия, на спокойном выдохе"
 }, {
   k: "armL",
-  label: "Рука L"
+  label: "Рука L",
+  hint: "НАПРЯЖЁННАЯ, пик бицепса, локоть 90°"
 }, {
   k: "armR",
-  label: "Рука R"
+  label: "Рука R",
+  hint: "НАПРЯЖЁННАЯ, пик бицепса, локоть 90°"
 }, {
   k: "thigh",
-  label: "Бедро"
+  label: "Бедро",
+  hint: "15 см выше верхнего края коленной чашечки"
 }];
 const HOOPER = [{
   k: "sleep",
@@ -1250,7 +1259,12 @@ function App() {
       fontSize: 12.5,
       color: "var(--muted)"
     }
-  }, "Конец спокойного выдоха. Не втягивать. 3 замера, разброс ≤0,3 см → медиана."), showGirth ? /*#__PURE__*/React.createElement("div", {
+  }, "Конец спокойного выдоха. Не втягивать. 3 замера, разброс ≤0,3 см → медиана.", " ", /*#__PURE__*/React.createElement("a", {
+    href: "/app/guide",
+    style: {
+      color: "var(--accent)"
+    }
+  }, "схемы точек")), showGirth ? /*#__PURE__*/React.createElement("div", {
     style: {
       display: "grid",
       gridTemplateColumns: "repeat(auto-fill,minmax(140px,1fr))",
@@ -1278,8 +1292,15 @@ function App() {
         [g.k]: e.target.value
       };
     }),
-    "aria-label": g.label
-  })))) : /*#__PURE__*/React.createElement("div", {
+    "aria-label": `${g.label}: ${g.hint}`
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10.5,
+      lineHeight: 1.35,
+      color: "var(--faint)",
+      marginTop: 4
+    }
+  }, g.hint)))) : /*#__PURE__*/React.createElement("div", {
     style: {
       padding: "12px 0",
       fontSize: 13,
